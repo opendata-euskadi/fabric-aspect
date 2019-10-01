@@ -10,7 +10,6 @@ import java.util.Map;
 import com.google.common.base.Predicate;
 import com.google.common.reflect.TypeToken;
 
-import r01f.collections.dirtytrack.interfaces.ChangesTrackableLazyCollection;
 import r01f.collections.lazy.LazyCollection;
 import r01f.collections.lazy.LazyMap;
 import r01f.reflection.ReflectionUtils;
@@ -89,7 +88,7 @@ public class ObjectsHierarchyModifier {
 			else if (changeChildsState && CollectionUtils.isCollection(f.getType())) {
 				Collection<?> theCol = (Collection<?>)fValue;
 				// Update the field at every LOADED element of the collection 
-				Collection<?> loadedValues = theCol instanceof LazyCollection ? ((ChangesTrackableLazyCollection<?>)theCol).loadedValues()	// ONLY update the loaded elements
+				Collection<?> loadedValues = theCol instanceof LazyCollection ? ((LazyCollection<?>)theCol).loadedValues()	// ONLY update the loaded elements
 																			  : theCol;
 				for (Object v : loadedValues) {
 					if (v == null) continue;
