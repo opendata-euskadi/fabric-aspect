@@ -10,8 +10,6 @@ import java.util.Map;
 import com.google.common.base.Predicate;
 import com.google.common.reflect.TypeToken;
 
-import r01f.aspects.interfaces.dirtytrack.ForceTransientToDirtyStateTrackable;
-import r01f.aspects.interfaces.dirtytrack.NotDirtyStateTrackable;
 import r01f.collections.dirtytrack.interfaces.ChangesTrackableLazyCollection;
 import r01f.collections.lazy.LazyCollection;
 import r01f.collections.lazy.LazyMap;
@@ -39,7 +37,7 @@ public class ObjectsHierarchyModifier {
 		if (obj == null) return;
 		
 		// Crawl if it's an object implementing typeRef
-		if (ReflectionUtils.isImplementing(obj.getClass(),typeRef.getRawType())) {
+		if (typeRef.getRawType().isAssignableFrom(obj.getClass())) {
 			modifierFunction.changeState(obj);
 		}
 		
@@ -49,12 +47,10 @@ public class ObjectsHierarchyModifier {
 		
 		for (Field f : fields) {
 			// Ignored fields
-			if (Modifier.isTransient(f.getModifiers()) && !f.isAnnotationPresent(ForceTransientToDirtyStateTrackable.class)) continue;	// do not process transient fields
-			if (Modifier.isStatic(f.getModifiers())) continue;																			// do not process static fields
-			if (f.isAnnotationPresent(NotDirtyStateTrackable.class)) continue;															// do not process @NotDirtyStateTrackable annotated fields (otherwise it enters an infinite loop)
+			if (Modifier.isFinal(f.getModifiers())) continue;
 			if (fieldAcceptCriteria != null && !fieldAcceptCriteria.apply(f)) continue;
 			
-			// Get the field value... if null do nothind
+			// Get the field value... if null do nothing
 			Object fValue = ReflectionUtils.fieldValue(obj,f,true);
 			if (fValue == null) continue;
 			
@@ -65,7 +61,7 @@ public class ObjectsHierarchyModifier {
 			
 			// --- complex types
 			if (changeChildsState
-			 && ReflectionUtils.isImplementing(fValue.getClass(),typeRef.getRawType())) {		// BEWARE!! check if it implements the IMPLEMENTATION and NOT the interface
+			 && typeRef.getRawType().isAssignableFrom(fValue.getClass())) {		// BEWARE!! check if it implements the IMPLEMENTATION and NOT the interface
 				T fzChild = (T)fValue;																			
 				ObjectsHierarchyModifier.changeObjectHierarchyState(fzChild,typeRef,		// Recursive 
 																	modifierFunction,changeChildsState,
@@ -73,7 +69,7 @@ public class ObjectsHierarchyModifier {
 				
 			}
 			
-			// --- CollectionS
+			// --- Collections
 			// a) Maps
 			if (changeChildsState && CollectionUtils.isMap(f.getType())) {
 				Map<?,?> theMap = (Map<?,?>)fValue;
@@ -82,7 +78,7 @@ public class ObjectsHierarchyModifier {
 																 	   : theMap.values();					
 				for (Object v : loadedValues) {
 					if (v == null) continue;
-					if (ReflectionUtils.isImplementing(v.getClass(),typeRef.getRawType())) {	// Update only elements implementing T
+					if (typeRef.getRawType().isAssignableFrom(v.getClass())) {	// Update only elements implementing T
 						ObjectsHierarchyModifier.changeObjectHierarchyState((T)v,typeRef,	// Recursive call
 												   							modifierFunction,changeChildsState,
 												   							fieldAcceptCriteria);
@@ -97,7 +93,7 @@ public class ObjectsHierarchyModifier {
 																			  : theCol;
 				for (Object v : loadedValues) {
 					if (v == null) continue;
-					if (ReflectionUtils.isImplementing(v.getClass(),typeRef.getRawType())) {	// Update only elements implementing T
+					if (typeRef.getRawType().isAssignableFrom(v.getClass())) {	// Update only elements implementing T
 						ObjectsHierarchyModifier.changeObjectHierarchyState((T)v,typeRef,	// Recursive call
 												   							modifierFunction,changeChildsState,
 												   							fieldAcceptCriteria);
@@ -106,7 +102,7 @@ public class ObjectsHierarchyModifier {
 			}
 			// c) Array
 			else if (changeChildsState && CollectionUtils.isArray(f.getType())) {
-				if (ReflectionUtils.isImplementing(f.getType().getComponentType(),typeRef.getRawType())) {	// Update only elements implementing T
+				if (typeRef.getRawType().isAssignableFrom(f.getType().getComponentType())) {	// Update only elements implementing T
 					int length = Array.getLength(fValue);
 				    for (int i = 0; i < length; i ++) { 
 				        Object v = Array.get(fValue,i);

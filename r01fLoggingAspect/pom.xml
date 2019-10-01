@@ -24,8 +24,7 @@
 <!-- MODULES                                                                -->
 <!-- ====================================================================== -->
 	<modules>
-    	<module>r01fLoggingInterfaceClasses</module>
-    <module>r01fLoggingClasses</module>
-    <module>r01fLoggingAspectClasses</module>
+		<module>r01fLoggingClasses</module>
+		<module>r01fLoggingAspectClasses</module>
   </modules>
 </project>

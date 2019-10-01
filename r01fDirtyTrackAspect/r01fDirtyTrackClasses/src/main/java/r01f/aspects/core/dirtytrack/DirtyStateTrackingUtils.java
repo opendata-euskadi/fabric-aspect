@@ -2,6 +2,7 @@ package r01f.aspects.core.dirtytrack;
 
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import r01f.aspects.core.util.ObjectsHierarchyModifier;
 import r01f.aspects.core.util.ObjectsHierarchyModifier.StateModifierFunction;
 import r01f.aspects.interfaces.dirtytrack.ConvertToDirtyStateTrackable;
 import r01f.aspects.interfaces.dirtytrack.DirtyStateTrackable;
+import r01f.aspects.interfaces.dirtytrack.ForceTransientToDirtyStateTrackable;
 import r01f.aspects.interfaces.dirtytrack.NotDirtyStateTrackable;
 import r01f.collections.dirtytrack.ChangesTrackedCollection;
 import r01f.collections.dirtytrack.ChangesTrackedList;
@@ -222,6 +224,11 @@ class DirtyStateTrackingUtils {
 	static final Predicate<Field> _fieldAcceptCriteria = new Predicate<Field>() {
 																@Override
 																public boolean apply(final Field f) {
+																	if (Modifier.isTransient(f.getModifiers())
+																	 && !f.isAnnotationPresent(ForceTransientToDirtyStateTrackable.class)) return false;	// do not process transient fields
+																	if (Modifier.isStatic(f.getModifiers())) return false;									// do not process static fields
+																	if (f.isAnnotationPresent(NotDirtyStateTrackable.class)) return false;					// do not process @NotDirtyStateTrackable annotated fields (otherwise it enters an infinite loop)
+
 																	if (f.getDeclaringClass().getPackage().getName().startsWith("java")) return false;	
 																	if (f.getDeclaringClass().getPackage().getName().startsWith("com.google")) return false;
 																	if (f.getName().startsWith("ajc$")) return false; 

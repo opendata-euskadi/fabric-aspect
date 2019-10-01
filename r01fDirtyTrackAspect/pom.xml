@@ -24,7 +24,6 @@
 <!-- MODULES                                                                -->
 <!-- ====================================================================== -->
 	<modules>
-    	<module>r01fDirtyTrackInterfaceClasses</module>
     	<module>r01fDirtyTrackAspectClasses</module>
     	<module>r01fDirtyTrackClasses</module>
   </modules>
