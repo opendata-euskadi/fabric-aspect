@@ -27,13 +27,77 @@
 		<!-- ///////////////////////////////////////// -->
 		<dependency>
 			<groupId>r01.r01f.base</groupId>
+			<artifactId>r01fBaseClasses</artifactId>
+			<version>${r01f.version}</version>
+			
+			<!-- exclude aspect interfaces -->
+			<!-- DO NOT EXCLUDE DirtyTrackInterfaceClasses -->
+			<exclusions>
+				<exclusion>
+					<groupId>r01.r01f.aspect.freezable</groupId>
+					<artifactId>r01fFreezableInterfaceClasses</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>r01.r01f.aspect.lazyload</groupId>
+					<artifactId>r01fLazyLoadInterfaceClasses</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>r01.r01f.aspect.logging</groupId>
+					<artifactId>r01fLoggingInterfaceClasses</artifactId>
+				</exclusion>
+				
+				<exclusion>
+					<groupId>r01.r01f.objectstreamer</groupId>
+					<artifactId>r01fObjectStreamerInterfaceClasses</artifactId>
+				</exclusion>
+				<exclusion>
+		    		<groupId>javax.inject</groupId>
+		    		<artifactId>javax.inject</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>joda-time</groupId>
+					<artifactId>joda-time</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-codec</groupId>
+					<artifactId>commons-codec</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<!--
+		Since both [r01fCollectionClasses] and [r01fReflectionClasses] depends
+		upon [r01fBaseClasses], removing [r01fBaseClasses]'s dependencies both
+		in [r01fCollectionClasses] & [r01fReflectionClasses] would be very verbose
+		... so ALL deps of  [r01fCollectionClasses] & [r01fReflectionClasses] are
+		    excluded & handled in a single point where [r01fBaseClasses] dep
+		    is declared above
+		-->
+		<dependency>
+			<groupId>r01.r01f.base</groupId>
 			<artifactId>r01fCollectionClasses</artifactId>
 			<version>${r01f.version}</version>
+			<!-- exclude ALL deps -->
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+		
+		<!-- Reflection -->
 		<dependency>
 			<groupId>r01.r01f.base</groupId>
 			<artifactId>r01fReflectionClasses</artifactId>
 			<version>${r01f.version}</version>
+			<!-- exclude ALL deps -->
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 </project>
