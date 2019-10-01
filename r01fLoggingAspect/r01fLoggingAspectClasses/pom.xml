@@ -33,4 +33,37 @@
 			<version>${r01f.version}</version>
 		</dependency>
 	</dependencies>
+	
+<!-- ====================================================================== -->
+<!-- BUID                                                                   -->
+<!-- ====================================================================== -->
+	<build>
+		<plugins>
+			<!-- disable maven-compiler-plugin so that ajc compiler is used and not javac -->
+			<!-- 
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-testCompile</id>
+						<phase>none</phase>
+					</execution>
+					<execution>
+						<id>default-compile</id>
+						<phase>none</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			 -->
+			 <!-- 
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+			</plugin>
+			 -->
+		</plugins>
+	</build>
 </project>

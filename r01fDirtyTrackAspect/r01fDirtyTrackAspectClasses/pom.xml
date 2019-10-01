@@ -34,9 +34,13 @@
 		</dependency>
 	</dependencies>
 	
+<!-- ====================================================================== -->
+<!-- BUID                                                                   -->
+<!-- ====================================================================== -->
 	<build>
 		<plugins>
 			<!-- disable maven-compiler-plugin so that ajc compiler is used and not javac -->
+			<!-- 
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<executions>
@@ -53,10 +57,13 @@
 					</execution>
 				</executions>
 			</plugin>
+			 -->
+			 <!-- 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
 			</plugin>
+			 -->
 		</plugins>
 	</build>
 	
