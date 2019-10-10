@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-			 
+
 	<modelVersion>4.0.0</modelVersion>
 
 <!-- ====================================================================== -->
@@ -11,13 +11,13 @@
 		<artifactId>r01fAspect</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 <!-- ====================================================================== -->
 <!-- ARTIFACT                                                               -->
 <!-- ====================================================================== -->
 	<name>r01fAspectUtilClasses</name>
 	<artifactId>r01fAspectUtilClasses</artifactId>
-	
+
 <!-- ====================================================================== -->
 <!-- DEPENDENCIES                                                           -->
 <!-- ====================================================================== -->
@@ -25,46 +25,6 @@
 		<!-- ///////////////////////////////////////// -->
 		<!-- R01F                                      -->
 		<!-- ///////////////////////////////////////// -->
-		<dependency>
-			<groupId>r01.r01f.base</groupId>
-			<artifactId>r01fBaseClasses</artifactId>
-			<version>${r01f.version}</version>
-			
-			<!-- exclude aspect interfaces -->
-			<!-- DO NOT EXCLUDE DirtyTrackInterfaceClasses -->
-			<exclusions>
-				<exclusion>
-					<groupId>r01.r01f.aspect.freezable</groupId>
-					<artifactId>r01fFreezableInterfaceClasses</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>r01.r01f.aspect.lazyload</groupId>
-					<artifactId>r01fLazyLoadInterfaceClasses</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>r01.r01f.aspect.logging</groupId>
-					<artifactId>r01fLoggingInterfaceClasses</artifactId>
-				</exclusion>
-				
-				<exclusion>
-					<groupId>r01.r01f.objectstreamer</groupId>
-					<artifactId>r01fObjectStreamerInterfaceClasses</artifactId>
-				</exclusion>
-				<exclusion>
-		    		<groupId>javax.inject</groupId>
-		    		<artifactId>javax.inject</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>joda-time</groupId>
-					<artifactId>joda-time</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>commons-codec</groupId>
-					<artifactId>commons-codec</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
 		<!--
 		Since both [r01fCollectionClasses] and [r01fReflectionClasses] depends
 		upon [r01fBaseClasses], removing [r01fBaseClasses]'s dependencies both
@@ -85,7 +45,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<!-- Reflection -->
 		<dependency>
 			<groupId>r01.r01f.base</groupId>

@@ -51,88 +51,46 @@
 <!-- ====================================================================== -->
 	<dependencies>
 		<!-- ///////////////////////////////////////// -->
-		<!-- Project lombok                            -->
+		<!-- R01F                                      -->
 		<!-- ///////////////////////////////////////// -->
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.16.20</version>
-		</dependency>
+			<groupId>r01.r01f.base</groupId>
+			<artifactId>r01fBaseClasses</artifactId>
+			<version>${r01f.version}</version>
 
-		<!-- ///////////////////////////////////////// -->
-		<!-- SL4FJ                                     -->
-		<!-- ///////////////////////////////////////// -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-
-		<!-- ///////////////////////////////////////// -->
-		<!-- Logback                                   -->
-		<!-- ///////////////////////////////////////// -->
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>${logback.verson}</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${logback.verson}</version>
-		</dependency>
-
-		<!-- ///////////////////////////////////////// -->
-		<!-- SL4FJ BRIDGES                             -->
-		<!-- ///////////////////////////////////////// -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>log4j-over-slf4j</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jul-to-slf4j</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-
-		<!-- ///////////////////////////////////////// -->
-		<!-- GUAVA                                     -->
-		<!-- ///////////////////////////////////////// -->
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>20.0</version>
-
+			<!-- exclude aspect interfaces -->
+			<!-- DO NOT EXCLUDE DirtyTrackInterfaceClasses -->
 			<exclusions>
 				<exclusion>
-					<groupId>com.google.j2objc</groupId>
-					<artifactId>*</artifactId>
+					<groupId>r01.r01f.aspect.freezable</groupId>
+					<artifactId>r01fFreezableInterfaceClasses</artifactId>
 				</exclusion>
 				<exclusion>
-					<groupId>com.google.errorprone</groupId>
-					<artifactId>*</artifactId>
+					<groupId>r01.r01f.aspect.lazyload</groupId>
+					<artifactId>r01fLazyLoadInterfaceClasses</artifactId>
 				</exclusion>
 				<exclusion>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>animal-sniffer-annotations</artifactId>
+					<groupId>r01.r01f.aspect.logging</groupId>
+					<artifactId>r01fLoggingInterfaceClasses</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>r01.r01f.objectstreamer</groupId>
+					<artifactId>r01fObjectStreamerInterfaceClasses</artifactId>
+				</exclusion>
+				<exclusion>
+		    		<groupId>javax.inject</groupId>
+		    		<artifactId>javax.inject</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>joda-time</groupId>
+					<artifactId>joda-time</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-codec</groupId>
+					<artifactId>commons-codec</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-
-		<!-- ///////////////////////////////////////// -->
-		<!-- TEST                                      -->
-		<!-- ///////////////////////////////////////// -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
