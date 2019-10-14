@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>r01.r01f.aspect.lazyload</groupId>
 		<artifactId>r01fLazyLoadAspect</artifactId>
-		<version>${r01f.version}</version>
+		<version>${revision}</version>
 	</parent>
 
 <!-- ====================================================================== -->
@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>r01.r01f.aspect.lazyload</groupId>
 			<artifactId>r01fLazyLoadClasses</artifactId>
-			<version>${r01f.version}</version>
+			<version>${revision}</version>
 		</dependency>
 	</dependencies>
 	

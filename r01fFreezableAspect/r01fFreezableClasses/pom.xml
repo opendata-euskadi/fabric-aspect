@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>r01.r01f.aspect.freezable</groupId>
 		<artifactId>r01fFreezableAspect</artifactId>
-		<version>${r01f.version}</version>
+		<version>${revision}</version>
 	</parent>
 	
 <!-- ====================================================================== -->
@@ -29,12 +29,12 @@
 		<dependency>
 			<groupId>r01.r01f.aspect</groupId>
 			<artifactId>r01fAspectUtilClasses</artifactId>
-			<version>${r01f.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>r01.r01f.aspect.freezable</groupId>
 			<artifactId>r01fFreezableInterfaceClasses</artifactId>
-			<version>${r01f.version}</version>
+			<version>${revision}</version>
 		</dependency>
 	</dependencies>
 </project>

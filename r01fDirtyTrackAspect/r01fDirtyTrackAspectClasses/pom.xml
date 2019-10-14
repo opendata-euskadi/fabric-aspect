@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>r01.r01f.aspect.dirtytrack</groupId>
 		<artifactId>r01fDirtyTrackAspect</artifactId>
-		<version>${r01f.version}</version>
+		<version>${revision}</version>
 	</parent>
 
 <!-- ====================================================================== -->
@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>r01.r01f.aspect.dirtytrack</groupId>
 			<artifactId>r01fDirtyTrackClasses</artifactId>
-			<version>${r01f.version}</version>
+			<version>${revision}</version>
 		</dependency>
 	</dependencies>
 	
