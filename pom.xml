@@ -54,7 +54,7 @@
 		<dependency>
 			<groupId>r01.r01f.base</groupId>
 			<artifactId>r01fBaseClasses</artifactId>
-			<version>${r01f.version}</version>
+			<version>${revision}</version>
 
 			<!-- exclude aspect interfaces -->
 			<!-- DO NOT EXCLUDE DirtyTrackInterfaceClasses -->
