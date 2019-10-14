@@ -376,7 +376,9 @@
 
 	</build>
 
-	<!-- Maven deploy -->
+<!-- ====================================================================== -->
+<!-- DISTRIBUTION ARTIFACTS                                                 -->
+<!-- ====================================================================== -->
 	<distributionManagement>
 		<repository>
 			<id>maven-public-releases</id>
