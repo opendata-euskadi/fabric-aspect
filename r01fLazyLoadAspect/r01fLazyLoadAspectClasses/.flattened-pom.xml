@@ -4,18 +4,18 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>r01.r01f.aspect.lazyload</groupId>
   <artifactId>r01fLazyLoadAspectClasses</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <dependencies>
     <dependency>
       <groupId>r01.r01f.aspect.lazyload</groupId>
       <artifactId>r01fLazyLoadClasses</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>r01.r01f.base</groupId>
       <artifactId>r01fBaseClasses</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.0.1</version>
       <scope>compile</scope>
       <exclusions>
         <exclusion>

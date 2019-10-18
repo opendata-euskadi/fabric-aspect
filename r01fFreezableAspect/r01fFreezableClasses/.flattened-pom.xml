@@ -4,24 +4,24 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>r01.r01f.aspect.freezable</groupId>
   <artifactId>r01fFreezableClasses</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <dependencies>
     <dependency>
       <groupId>r01.r01f.aspect</groupId>
       <artifactId>r01fAspectUtilClasses</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>r01.r01f.aspect.freezable</groupId>
       <artifactId>r01fFreezableInterfaceClasses</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>r01.r01f.base</groupId>
       <artifactId>r01fBaseClasses</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.0.1</version>
       <scope>compile</scope>
       <exclusions>
         <exclusion>
