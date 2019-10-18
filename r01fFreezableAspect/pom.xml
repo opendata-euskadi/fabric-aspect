@@ -24,7 +24,7 @@
 <!-- MODULES                                                                -->
 <!-- ====================================================================== -->
 	<modules>
-    	<module>r01fFreezableClasses</module>
-    	<module>r01fFreezableAspectClasses</module>
-  </modules>
+		<module>r01fFreezableClasses</module>
+		<module>r01fFreezableAspectClasses</module>
+	</modules>
 </project>

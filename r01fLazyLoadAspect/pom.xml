@@ -24,7 +24,7 @@
 <!-- MODULES                                                                -->
 <!-- ====================================================================== -->
 	<modules>
-   		<module>r01fLazyLoadClasses</module>
+		<module>r01fLazyLoadClasses</module>
 		<module>r01fLazyLoadAspectClasses</module>
-  </modules>
+	</modules>
 </project>

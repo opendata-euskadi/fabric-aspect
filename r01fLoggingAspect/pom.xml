@@ -26,5 +26,5 @@
 	<modules>
 		<module>r01fLoggingClasses</module>
 		<module>r01fLoggingAspectClasses</module>
-  </modules>
+	</modules>
 </project>
