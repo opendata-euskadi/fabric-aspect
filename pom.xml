@@ -21,7 +21,8 @@
 		<r01f.version>${revision}</r01f.version>
 
 		<!-- Dependencies versions -->
-		<aspectj.version>1.9.4</aspectj.version>
+<!-- 		<aspectj.version>1.9.4</aspectj.version> -->
+		<aspectj.version>1.8.13</aspectj.version>
 	</properties>
 
 <!-- ====================================================================== -->
@@ -77,8 +78,8 @@
 					<artifactId>r01fObjectStreamerInterfaceClasses</artifactId>
 				</exclusion>
 				<exclusion>
-		    		<groupId>javax.inject</groupId>
-		    		<artifactId>javax.inject</artifactId>
+					<groupId>javax.inject</groupId>
+					<artifactId>javax.inject</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>joda-time</groupId>
@@ -89,6 +90,20 @@
 					<artifactId>commons-codec</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<!-- ///////////////////////////////////////// -->
+		<!-- AOP - Aspect Dependencies                 -->
+		<!-- ///////////////////////////////////////// -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+			<version>${aspectj.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -203,6 +218,11 @@
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>3.1.1</version>	<!-- version 3.1.2 is problematic in older versions of eclipse (upgrade the maven conector from https://download.eclipse.org/m2e-wtp/releases/1.4/) -->
+					<configuration>
+						<archive>
+							<addMavenDescriptor>false</addMavenDescriptor>
+						</archive>
+					</configuration>
 				</plugin>
 				<!--
 					[5] - INSTALL: https://maven.apache.org/plugins/maven-war-plugin/
@@ -292,6 +312,7 @@
 				</plugin>
 
 				<!-- aspectj compiler -->
+				<!-- https://www.mojohaus.org/aspectj-maven-plugin/usage.html -->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>aspectj-maven-plugin</artifactId>
@@ -301,12 +322,15 @@
 						<complianceLevel>${maven.compiler.source}</complianceLevel>
 						<source>${maven.compiler.source}</source>
 						<target>${maven.compiler.source}</target>
-						<showWeaveInfo>true</showWeaveInfo>
-						<verbose>true</verbose>
+						<showWeaveInfo>false</showWeaveInfo>
+						<verbose>false</verbose>
 						<Xlint>ignore</Xlint>
-						<encoding>UTF-8 </encoding>
-						<!--<ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>-->
+						<encoding>UTF-8</encoding>
 						<aspectDirectory>src/main/aspect</aspectDirectory>
+						<includes>
+							<include>**/*.java</include>
+							<include>**/*.aj</include>
+						</includes>
 					</configuration>
 					<executions>
 						<execution>
@@ -316,45 +340,6 @@
 							</goals>
 						</execution>
 					</executions>
-					<dependencies>
-						<dependency>
-							<groupId>org.aspectj</groupId>
-							<artifactId>aspectjrt</artifactId>
-							<version>${aspectj.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>org.aspectj</groupId>
-							<artifactId>aspectjtools</artifactId>
-							<version>${aspectj.version}</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-				<!-- Fix AspectJ lifecycle error in eclipes -->
-				<!-- (see https://eureka.ykyuen.info/2013/12/18/aspectj-plugin-execution-not-covered-by-lifecycle-configuration-error-in-eclipse/) -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.codehaus.mojo</groupId>
-										<artifactId>aspectj-maven-plugin</artifactId>
-										<versionRange>[1.0,)</versionRange>
-										<goals>
-											<goal>test-compile</goal>
-											<goal>compile</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-									  <execute />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
