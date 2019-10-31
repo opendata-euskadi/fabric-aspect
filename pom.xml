@@ -39,11 +39,9 @@
 	<modules>
 		<module>r01fAspectUtilClasses</module>
 		<module>r01fDirtyTrackAspect</module>
-<!--
 		<module>r01fFreezableAspect</module>
 		<module>r01fLazyLoadAspect</module>
 		<module>r01fLoggingAspect</module>
--->
 	</modules>
 
 <!-- ====================================================================== -->
