@@ -17,11 +17,10 @@
 		<!-- BEWARE! use this property on [dependencies] ONLY
 					 for [artifact] versioning use maven versions plugin:
 						> mvn versions:set -DnewVersion=1.0.3 -->
-		<revision>0.0.1</revision>
+		<revision>0.0.1-SNAPSHOT</revision>
 		<r01f.version>${revision}</r01f.version>
 
 		<!-- Dependencies versions -->
-<!-- 		<aspectj.version>1.9.4</aspectj.version> -->
 		<aspectj.version>1.8.13</aspectj.version>
 	</properties>
 
@@ -292,7 +291,6 @@
 								<goal>flatten</goal>
 							</goals>
 						</execution>
-<!--
 						<execution>
 							<id>flatten.clean</id>
 							<phase>clean</phase>
@@ -300,7 +298,6 @@
 								<goal>clean</goal>
 							</goals>
 						</execution>
--->
 					</executions>
 				</plugin>
 
