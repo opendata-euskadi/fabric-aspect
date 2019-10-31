@@ -223,15 +223,6 @@
 						</archive>
 					</configuration>
 				</plugin>
-				<plugin>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>3.2.3</version>
-					<configuration>
-						<archive>
-							<addMavenDescriptor>false</addMavenDescriptor>
-						</archive>
-					</configuration>
-				</plugin>
 				<!--
 					[5] - INSTALL: https://maven.apache.org/plugins/maven-war-plugin/
 						The Install Plugin is used during the install phase to add artifact(s) to the local repository
