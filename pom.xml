@@ -21,7 +21,7 @@
 		<r01f.version>${revision}</r01f.version>
 
 		<!-- Dependencies versions -->
-		<aspectj.version>1.9.4</aspectj.version>
+		<aspectj.version>1.8.13</aspectj.version>
 	</properties>
 
 <!-- ====================================================================== -->
