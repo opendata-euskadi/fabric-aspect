@@ -160,7 +160,11 @@
 <!-- PLUGINS                                                                -->
 <!-- ====================================================================== -->
 	<build>
-
+		<!--
+		Default plugin config
+		BEWARE!! In [eclipse] ensure this config is set:
+					[window] > [preferences] > [Maven] > [Errors/Wranings] > [Plugin execution NOT covered by lifecycle configuration] >>> se to WARNING 
+		-->
 		<pluginManagement>
 			<plugins>
 				<!--
@@ -223,8 +227,17 @@
 						</archive>
 					</configuration>
 				</plugin>
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>3.2.3</version>
+					<configuration>
+						<archive>
+							<addMavenDescriptor>false</addMavenDescriptor>
+						</archive>
+					</configuration>
+				</plugin>
 				<!--
-					[5] - INSTALL: https://maven.apache.org/plugins/maven-war-plugin/
+					[5] - INSTALL: https://maven.apache.org/plugins/maven-install-plugin/
 						The Install Plugin is used during the install phase to add artifact(s) to the local repository
 				-->
 				<plugin>
@@ -232,7 +245,7 @@
 					<version>3.0.0-M1</version>
 				</plugin>
 				<!--
-					 [6] - DEPLOY: https://maven.apache.org/plugins/maven-deploy-plugin/usage.html
+					[6] - DEPLOY: https://maven.apache.org/plugins/maven-deploy-plugin/usage.html
 				-->
 				<plugin>
 					<artifactId>maven-deploy-plugin</artifactId>
@@ -263,7 +276,6 @@
 							</goals>
 							<configuration>
 								<sources>
-									<source>src/main/aspect</source>			<!-- BEWARE!!! this is where aspect source resides -->
 									<source>src/main/resources</source>
 									<source>src/test/resources</source>
 								</sources>
@@ -306,40 +318,9 @@
 					<artifactId>versions-maven-plugin</artifactId>
 					<version>2.7</version>
 				</plugin>
-
-				<!-- aspectj compiler -->
-				<!-- https://www.mojohaus.org/aspectj-maven-plugin/usage.html -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>aspectj-maven-plugin</artifactId>
-					<version>1.11</version>
-					<configuration>
-						<forceAjcCompile>true</forceAjcCompile>
-						<complianceLevel>${maven.compiler.source}</complianceLevel>
-						<source>${maven.compiler.source}</source>
-						<target>${maven.compiler.source}</target>
-						<showWeaveInfo>false</showWeaveInfo>
-						<verbose>false</verbose>
-						<Xlint>ignore</Xlint>
-						<encoding>UTF-8</encoding>
-						<aspectDirectory>src/main/aspect</aspectDirectory>
-						<includes>
-							<include>**/*.java</include>
-							<include>**/*.aj</include>
-						</includes>
-					</configuration>
-					<executions>
-						<execution>
-							<goals>
-								<goal>compile</goal>	   <!-- use this goal to weave all your main classes -->
-								<goal>test-compile</goal>  <!-- use this goal to weave all your test classes -->
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
 			</plugins>
 		</pluginManagement>
-
+		
 		<!--
 		Plugins to be run by default 
 		-->

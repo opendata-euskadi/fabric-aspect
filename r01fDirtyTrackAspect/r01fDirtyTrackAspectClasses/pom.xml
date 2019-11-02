@@ -37,6 +37,41 @@
 <!-- BUID                                                                   -->
 <!-- ====================================================================== -->
 	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- aspectj compiler -->
+				<!-- https://www.mojohaus.org/aspectj-maven-plugin/usage.html -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>aspectj-maven-plugin</artifactId>
+					<version>1.11</version>
+					<configuration>
+						<forceAjcCompile>true</forceAjcCompile>
+						<complianceLevel>${maven.compiler.source}</complianceLevel>
+						<source>${maven.compiler.source}</source>
+						<target>${maven.compiler.source}</target>
+						<showWeaveInfo>false</showWeaveInfo>
+						<verbose>false</verbose>
+						<Xlint>ignore</Xlint>
+						<encoding>UTF-8</encoding>
+						<aspectDirectory>src/main/aspect</aspectDirectory>
+						<includes>
+							<include>**/*.java</include>
+							<include>**/*.aj</include>
+						</includes>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>compile</goal>	   <!-- use this goal to weave all your main classes -->
+								<goal>test-compile</goal>  <!-- use this goal to weave all your test classes -->
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
