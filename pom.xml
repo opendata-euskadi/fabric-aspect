@@ -18,7 +18,6 @@
 					 for [artifact] versioning use maven versions plugin:
 						> mvn versions:set -DnewVersion=1.0.3 -->
 		<revision>0.0.1-SNAPSHOT</revision>
-		<r01f.version>${revision}</r01f.version>
 
 		<!-- Dependencies versions -->
 		<aspectj.version>1.8.13</aspectj.version>
