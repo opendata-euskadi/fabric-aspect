@@ -59,7 +59,7 @@ privileged public abstract aspect DirtyStateTrackableAspectBase<D extends DirtyS
 //	HOOK ON SIMPLE STATE MODIFICATIONS
 /////////////////////////////////////////////////////////////////////////////////////////
 	/**
-	 * Advice after: this is executed BEFORE setting a field
+	 * Advice before: this is executed BEFORE setting a field
 	 */
 	before(D trck,Object newValue) : 
 				fieldSetInDirtyStateTrackableObj(trck,newValue) {

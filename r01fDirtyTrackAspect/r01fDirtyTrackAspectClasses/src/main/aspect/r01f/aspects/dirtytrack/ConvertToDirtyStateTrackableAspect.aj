@@ -27,7 +27,7 @@ privileged public aspect ConvertToDirtyStateTrackableAspect {
 	 * Make every @ConvertToDirtyStateTrackable annotated types that do not extends from Map, List or Set 
 	 * implement {@link DirtyStateTrackable} interface (the behavior impl is at {@link DirtyStateTrackableAspect})
 	 */
-	declare parents : @ConvertToDirtyStateTrackable !(Map+ || List+ || Set+) && !DirtyStateTrackable+ implements DirtyStateTrackable;
+	declare parents : @ConvertToDirtyStateTrackable !(Map+ || Collection+ || List+ || Set+) && !DirtyStateTrackable+ implements DirtyStateTrackable;
 	/**
 	 * Make every @ConvertToDirtyStateTrackable annotated types that extends from Map 
 	 * implement {@link ChangesTrackableMap} interface (the behavior impl is at {@link ChangesTrackableCollectionAspect})

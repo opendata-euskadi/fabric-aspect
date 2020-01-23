@@ -41,33 +41,33 @@ class DirtyStateTrackingUtils {
 	static <K,V,T extends Map<K,V>> Object wrapMapToTrackable(final DirtyStateTrackable trckContainer,
 															  final Field mapField,
 															  final T map) {
-    	// If all this happens:
-    	//		a.- It's a trackable object and changes are being tracked 
-    	//		b.- It's NOT a ChangesTrackableMap
-    	// change the object for a trackable one
+		// If all this happens:
+		//		a.- It's a trackable object and changes are being tracked 
+		//		b.- It's NOT a ChangesTrackableMap
+		// change the object for a trackable one
 		Object outMap = null;
 		if (trckContainer.getTrackingStatus() == null) {
 			log.error("The Map tracking status is null");
 			outMap = map;
 		} else if (trckContainer.getTrackingStatus().isThisDirtyTracking() && !(map instanceof ChangesTrackableMap)) {
-    		// Ensure the field is a Map
-    		boolean isMap = Map.class.isAssignableFrom(mapField.getType());
-    		if (!isMap) throw new IllegalArgumentException("The Map field " + mapField.getDeclaringClass().getName() + "." + mapField.getName() + " (" + mapField.getType() + ") type is NOT a java.util.Map (the interface), so it cannot be converted to a ChangesTrackableMap.");
-    		
-    		// Change the field instance for a ChangesTrackableMap
-    		ChangesTrackableMap<K,V> changesTracked = _wrapMap(map);
-    		changesTracked.getTrackingStatus().setThisDirtyTracking(trckContainer.getTrackingStatus().isThisDirtyTracking());		// pasarle el estado de tracking al nuevo mapa
-    		ReflectionUtils.setFieldValue(trckContainer,mapField,changesTracked,false);
+			// Ensure the field is a Map
+			boolean isMap = Map.class.isAssignableFrom(mapField.getType());
+			if (!isMap) throw new IllegalArgumentException("The Map field " + mapField.getDeclaringClass().getName() + "." + mapField.getName() + " (" + mapField.getType() + ") type is NOT a java.util.Map (the interface), so it cannot be converted to a ChangesTrackableMap.");
+			
+			// Change the field instance for a ChangesTrackableMap
+			ChangesTrackableMap<K,V> changesTracked = _wrapMap(map);
+			changesTracked.getTrackingStatus().setThisDirtyTracking(trckContainer.getTrackingStatus().isThisDirtyTracking());		// pasarle el estado de tracking al nuevo mapa
+			ReflectionUtils.setFieldValue(trckContainer,mapField,changesTracked,false);
 
-    		outMap = changesTracked;
-    	} else if (!trckContainer.getTrackingStatus().isThisDirtyTracking() && map instanceof ChangesTrackableMap) {
-    		// Changes are NOT being tracked but the Map was substituted by a ChangesTrackableMap: just return the map
-    		outMap = map;
-    	} else {
-    		// Changes are being tracked and the Map was already substituted by a ChangesTrackableMap
-    		outMap = map;
-    	}
-    	return outMap;
+			outMap = changesTracked;
+		} else if (!trckContainer.getTrackingStatus().isThisDirtyTracking() && map instanceof ChangesTrackableMap) {
+			// Changes are NOT being tracked but the Map was substituted by a ChangesTrackableMap: just return the map
+			outMap = map;
+		} else {
+			// Changes are being tracked and the Map was already substituted by a ChangesTrackableMap
+			outMap = map;
+		}
+		return outMap;
 	}
 	/**
 	 * Wraps a {@link Collection}-type field so all changes made are tracked
@@ -79,32 +79,37 @@ class DirtyStateTrackingUtils {
 	static <V,T extends Collection<V>> Object wrapCollectionToTrackable(final DirtyStateTrackable trckContainer,
 																		final Field colField,
 																		final T col) {
-    	// If all this happens:
-    	//		a.- It's a trackable object and changes are being tracked 
-    	//		b.- It's NOT a ChangesTrackableCollection
-    	// change the object for a trackable one
+		// If all this happens:
+		//		a.- It's a trackable object and changes are being tracked 
+		//		b.- It's NOT a ChangesTrackableCollection
+		// change the object for a trackable one
 		Object outCol = null;
-    	if (trckContainer.getTrackingStatus().isThisDirtyTracking() && !(col instanceof ChangesTrackableCollection)) {
-    		// Changes are being tracked but the collection has not already been substituted 
-    		// Ensure the field is a Collection
-    		boolean isCollectionOrSet = Collection.class.isAssignableFrom(colField.getType()) || 
-    									Set.class.isAssignableFrom(colField.getType()) ||
-    									List.class.isAssignableFrom(colField.getType());
-    		if (!isCollectionOrSet) throw new IllegalArgumentException("The Collection/List/Set field " + colField.getDeclaringClass().getName() + "." + colField.getName() + " (" + colField.getType() + ") type is NOT a java.util.Collection/java.util.List/java.util.Set (the interface), so it cannot be converted to a ChangesTrackableCollection.");
-    		
-    		// Change the field instance for a ChangesTrackableCollection
-    		ChangesTrackableCollection<V> changesTracked = _wrapCollection(col);
-    		changesTracked.getTrackingStatus().setThisDirtyTracking(trckContainer.getTrackingStatus().isThisDirtyTracking());		// pasarle el estado de tracking a la nueva colecci�n
-    		ReflectionUtils.setFieldValue(trckContainer,colField,changesTracked,false);
-    		outCol = changesTracked;
-    	} else if (!trckContainer.getTrackingStatus().isThisDirtyTracking() && col instanceof ChangesTrackableCollection) {
-    		// Changes are NOT being tracked but the collection was substituted by a ChangesTrackableCollection: just return the col
-    		outCol = col;
-    	} else {
-    		// Changes are being tracked and the Map was already substituted by a ChangesTrackableCollection
-    		outCol = col;
-    	}
-    	return outCol;
+		if (trckContainer.getTrackingStatus().isThisDirtyTracking() 
+		 && !(col instanceof ChangesTrackableCollection)) {
+			// Changes are being tracked but the collection has not already been substituted 
+			// Ensure the field is a Collection
+			boolean isCollectionOrSet = Collection.class.isAssignableFrom(colField.getType()) || 
+										Set.class.isAssignableFrom(colField.getType()) ||
+										List.class.isAssignableFrom(colField.getType());
+			if (!isCollectionOrSet) throw new IllegalArgumentException("The Collection/List/Set field " + colField.getDeclaringClass().getName() + "." + colField.getName() + " (" + colField.getType() + ") type is NOT a java.util.Collection/java.util.List/java.util.Set (the interface), so it cannot be converted to a ChangesTrackableCollection.");
+			
+			// Change the field instance for a ChangesTrackableCollection
+			ChangesTrackableCollection<V> changesTracked = _wrapCollection(col);
+			changesTracked.getTrackingStatus()
+						  .setThisDirtyTracking(trckContainer.getTrackingStatus()
+								  							 .isThisDirtyTracking());	// hand the tracking status to the new col
+			ReflectionUtils.setFieldValue(trckContainer,colField,changesTracked,false);
+			outCol = changesTracked;
+		} else if (!trckContainer.getTrackingStatus().isThisDirtyTracking()
+				&& col instanceof ChangesTrackableCollection) {
+			// Changes are NOT being tracked but the collection was substituted by a ChangesTrackableCollection: just return the col
+			outCol = col;
+		} else {
+			// a) Changes are NOT being tracked: just return the original collection
+			// b) Changes are being tracked and the Collection was already substituted by a ChangesTrackableCollection
+			outCol = col;
+		}
+		return outCol;
 	}
 	/**
 	 * Wraps a {@link LanguageTexts}-type field so all changes made are tracked
@@ -242,7 +247,7 @@ class DirtyStateTrackingUtils {
 	static class DirtyStatusModifier {
 		@NoArgsConstructor
 		private static class DirtyStatusResetFunction 
-			      implements StateModifierFunction<DirtyStateTrackable> {
+				  implements StateModifierFunction<DirtyStateTrackable> {
 			
 			@Override
 			public void changeState(final DirtyStateTrackable obj) {
@@ -266,7 +271,7 @@ class DirtyStateTrackingUtils {
 	}
 	static class DirtyTrackingStatusModifier {
 		private static class DirtyTrackingStatusModifierFunction 
-		          implements StateModifierFunction<DirtyStateTrackable> {
+				  implements StateModifierFunction<DirtyStateTrackable> {
 			
 			private final boolean _track;
 			private 	  boolean _checkIfOldValueChanges;
@@ -318,7 +323,7 @@ class DirtyStateTrackingUtils {
 		 * @param trackableObj
 		 */
 		@SuppressWarnings("serial")
-		public static void stopTrackingChangesInState(DirtyStateTrackable trackableObj,
+		public static void stopTrackingChangesInState(final DirtyStateTrackable trackableObj,
 													  final boolean stopTrackingInChilds) {
 			ObjectsHierarchyModifier.<DirtyStateTrackable>changeObjectHierarchyState(trackableObj,new TypeToken<DirtyStateTrackable>() {/* nothing */},
 																		   			 new DirtyTrackingStatusModifierFunction(false),

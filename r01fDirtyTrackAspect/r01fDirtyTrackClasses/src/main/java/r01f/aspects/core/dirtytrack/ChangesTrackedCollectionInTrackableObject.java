@@ -113,7 +113,7 @@ public class ChangesTrackedCollectionInTrackableObject<V>
 		return  ((Collection<V>)_changesTrackedCollection).toArray();
 	}
 	@Override @SuppressWarnings("unchecked")
-	public <T> T[] toArray(T[] a) {
+	public <T> T[] toArray(final T[] a) {
 		return  ((Collection<V>)_changesTrackedCollection).toArray(a);
 	}
 	@Override @SuppressWarnings("unchecked")
