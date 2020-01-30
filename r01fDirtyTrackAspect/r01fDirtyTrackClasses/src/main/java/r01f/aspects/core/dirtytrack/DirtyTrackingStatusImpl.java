@@ -247,7 +247,7 @@ public class DirtyTrackingStatusImpl
     }
 	public static <V> Object _arroundCollectionFieldGet(final DirtyStateTrackable trck,final Field field,final Collection<V> theCol) {
 		if (theCol == null) return null;
-		
+
 		// if it's already a ChangesTrackableCollection instance do nothing
 		if (theCol instanceof ChangesTrackableCollection) return theCol;
 		
