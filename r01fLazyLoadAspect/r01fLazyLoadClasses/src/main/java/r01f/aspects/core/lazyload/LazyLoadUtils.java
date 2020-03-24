@@ -46,7 +46,7 @@ public class LazyLoadUtils {
 															   					 field);
 				lazyLoaded = supplier.instanceFor(container);
 			}
-		} catch(ClassCastException ccEx) {
+		} catch (ClassCastException ccEx) {
 			// A ClassCastException is thrown because the Supplier is not returning the expected object's type
 			// (thisJoinPoint.getTarget() is NOT of the expected type)
 			throw new IllegalArgumentException("The Supplier does NOT match with the actual type: " + container.getClass().getName(),
