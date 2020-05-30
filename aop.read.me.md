@@ -55,10 +55,10 @@ Recubrimiento (weaving) en tiempo de carga en ECLIPSE
 Modificar la configuración de ejecución de la clase que contiene el método main()
 	- Run Configurations... clase que contiene el método main()
 - En la pestaña (x)=Arguments añadir a los parámetros de la máquina virtual (VM Arguments):
-	-javaagent:D:/tools_workspaces/eclipse/libs/aspectj-1.7.4/lib/aspectjweaver.jar -Daj.weaving.verbose=true
+	-javaagent:{dev-home}/libs/aspectj-1.7.4/lib/aspectjweaver.jar -Daj.weaving.verbose=true
 	- En la pestaña ClassPath añadir dos user-entries:
-				D:/tools_workspaces/eclipse/libs/aspectj-1.7.4/lib/aspectjrt.jar
-				D:/tools_workspaces/eclipse/libs/aspectj-1.7.4/lib/aspectjweaver.jar
+				{dev-home}/eclipse/libs/aspectj-1.7.4/lib/aspectjrt.jar
+				{dev-home}/eclipse/libs/aspectj-1.7.4/lib/aspectjweaver.jar
 
 Recubrimiento (weaving) en tiempo de carga en WEBLOGIC
 ------------------------------------------------------
@@ -68,14 +68,14 @@ Para activar el recubrimiento en tiempo de ejecución (load-time weaving):
 				A.1 Añadir la siguiente opción al arrancar la máquina virtual:
 						set ASPECTJ_VMOPTIONS_JROCKIT=-Daj.weaving.verbose=true -Xmanagement:class=org.aspectj.weaver.loadtime.JRockitAgent
 				A.2 Añadir al ClassPath
-						set ASPECTJ_CLASSPATH=D:/tools_workspaces/eclipse/libs/aspectj-1.7.4/lib/aspectjrt.jar
-						set ASPECTJ_CLASSPATH_JROCKIT=D:/tools_workspaces/eclipse/libs/aspectj-1.7.4/lib/aspectjweaver.jar
+						set ASPECTJ_CLASSPATH={dev-home}/eclipse/libs/aspectj-1.7.4/lib/aspectjrt.jar
+						set ASPECTJ_CLASSPATH_JROCKIT={dev-home}/libs/aspectj-1.7.4/lib/aspectjweaver.jar
 
 		B) Si se utiliza la JVM normal
 				B.1 Añadir la siguiente opción al arrancar la máquina virtual:
-						set ASPECTJ_VMOPTIONS=-Daj.weaving.verbose=true -javaagent:D:/tools_workspaces/eclipse/libs/aspectj-1.7.4/lib/aspectjweaver.jar
+						set ASPECTJ_VMOPTIONS=-Daj.weaving.verbose=true -javaagent:{dev-home}/libs/aspectj-1.7.4/lib/aspectjweaver.jar
 		 		B.2 Añadir al ClassPath
-						set ASPECTJ_CLASSPATH=D:/tools_workspaces/eclipse/libs/aspectj-1.7.4/lib/aspectjrt.jar
+						set ASPECTJ_CLASSPATH={dev-home}/libs/aspectj-1.7.4/lib/aspectjrt.jar
 
 2.- Localización del fichero aop.xml
 		Tal y como se explica en el documento organizacion_proyectos.txt, el objetivo es cargar el fichero aop.xml con el loader
