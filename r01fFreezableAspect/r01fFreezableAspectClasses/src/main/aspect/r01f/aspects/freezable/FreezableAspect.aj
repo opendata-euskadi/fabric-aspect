@@ -15,17 +15,17 @@ import r01f.reflection.ReflectionUtils;
 
 
 /**
- * Implementación del interfaz {@link Freezable} en base a ASPECTJ
+ * Implementacin del interfaz {@link Freezable} en base a ASPECTJ
  * 
  * Para hacer que un tipo implemente el interfaz {@link Freezable} hay que:
  *		- PASO 1: Establecer que todas las clases anotadas con @ConvertToFreezable implementen
  *				  el interfaz FreezableInterface
  *						declare parents: @ConvertToFreezable * implements Freezable;
  *		- PASO 2: Crear el interfaz Freezable (ver aspecto {@link FreezableInterfaceAspect})
- *		- PASO 3: Implementar los pointcuts específicos para el interfaz {@link Freezable}
+ *		- PASO 3: Implementar los pointcuts especficos para el interfaz {@link Freezable}
  * 
- * NOTA: 	Para mejorar la reutilización, el aspecto se divide en DOS
- * 				- La implementación del interfaz Freezable (este aspecto)
+ * NOTA: 	Para mejorar la reutilizacin, el aspecto se divide en DOS
+ * 				- La implementacin del interfaz Freezable (este aspecto)
  * 				- Otro aspecto que "inyecta" el interfaz {@link Freezable} a aquellas clases 
  * 				  que se considere necesario, por ejemplo aquellas anotadas con @ConvertToFreezable
  * 				  (Ver {@link FreezableInterfaceAspect})
@@ -146,33 +146,33 @@ privileged public aspect FreezableAspect { // perthis(freezableAnnotatedObj() ||
     }
 	/**
 	 * IMPORTANTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	 * Hay que tener en cuenta que hay dos formas de invocar un método mutator de un mapa o colección 
+	 * Hay que tener en cuenta que hay dos formas de invocar un mtodo mutator de un mapa o coleccin 
 	 * que es un miembro (field) de un objeto Container:
 	 * 		public class Container {
 	 * 			public Map _mapField;
 	 * 		}
-	 * CASO 1: Desde FUERA del objeto que contiene el miembro colección (map o collection):
+	 * CASO 1: Desde FUERA del objeto que contiene el miembro coleccin (map o collection):
 	 * 			public class OtherObj {
 	 * 				public void method() { 
-	 * 					container.getMapField().put(..) <-- el pointcut está en el objeto/método que hace la llamada a put(..) en el Map,
+	 * 					container.getMapField().put(..) <-- el pointcut est en el objeto/mtodo que hace la llamada a put(..) en el Map,
 	 * 				}										es decir en el objeto OtherObj y NO en el objeto container que contiene el Map 
 	 * 			}											
-	 * CASO 2: Desde FUERA del objeto que contiene el miembro colección (map o collection):
+	 * CASO 2: Desde FUERA del objeto que contiene el miembro coleccin (map o collection):
 	 * 			public class OtherObj {
 	 * 				public void method() {
-	 * 					container.putIntoMapField(..) <-- el método putIntoMapField del objeto container es el que 
-	 * 				}								 	  hace la llamada al método put(..) del Map así que ahí está el pointcut
+	 * 					container.putIntoMapField(..) <-- el mtodo putIntoMapField del objeto container es el que 
+	 * 				}								 	  hace la llamada al mtodo put(..) del Map as que ah est el pointcut
 	 * 			} 
-	 * Esto implica que en un solo pointcut NO se puede tener acceso al objeto que contiene el objeto colección (map / collection), 
-	 * unicamente se puede obtener el objeto colección y los argumentos del método mutator
+	 * Esto implica que en un solo pointcut NO se puede tener acceso al objeto que contiene el objeto coleccin (map / collection), 
+	 * unicamente se puede obtener el objeto coleccin y los argumentos del mtodo mutator
 	 * 
-	 * IMPORTANTE!!	Para evitar que este pointcut se aplique a TODOS los métodos mutator de todas las colecciones, se ha de implementar el 
+	 * IMPORTANTE!!	Para evitar que este pointcut se aplique a TODOS los mtodos mutator de todas las colecciones, se ha de implementar el 
 	 * 				pointcut collectionsMutatorMethodsCallingTypes, por ejemplo para capturar las llamadas a put() en el CASO 1 en 
 	 * 				cualquier clase de r01f:
 	 * 					pointcut collectionsMutatorMethodsCallingTypes() : within(r01f..*);
 	 * 
-	 * Esta implementación es compleja, así que se ha optado por capturar los accesos a los miembros tipo coleccion y devolver un wrapper
-	 * del tipo concreto (map/collection) que "lleva" el control de si está congelado o no 
+	 * Esta implementacin es compleja, as que se ha optado por capturar los accesos a los miembros tipo coleccion y devolver un wrapper
+	 * del tipo concreto (map/collection) que "lleva" el control de si est congelado o no 
      */
 	
 	// Este POINTCUT NO SIRVE para todos los casos:
@@ -197,7 +197,7 @@ privileged public aspect FreezableAspect { // perthis(freezableAnnotatedObj() ||
 	//		NO funciona para el caso 1: freezableObj.getColField().put(...)
 //	pointcut mutatorMethodCallOnFieldImplementingCollection(Freezable theObj,Collection theCol) : 
 //					(call(* Collection+.remove(*)) || call(* Collection+.removeAll(*)) || call(* Collection+.retainAll(*)) || call(* Collection+.clear()) ||  
-//					call(* Collection+.add(*)) || call(* Collection+.addAll(*))) &&		// método mutator de un mapa
+//					call(* Collection+.add(*)) || call(* Collection+.addAll(*))) &&		// mtodo mutator de un mapa
 //					freezableInterfaceImplementingObj() &&								// en un objeto Freezable
 //					!within(FreezableInterfaceAspect) &&								// pero NO dentro de un aspecto FreezableInterfaceAspect
 //					this(theObj) && target(theCol);		// this = objeto que hace la llamada al advice / target = objeto que recibe el advice
