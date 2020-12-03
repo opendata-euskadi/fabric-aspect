@@ -17,7 +17,7 @@ import r01f.aspects.interfaces.freezable.Freezable;
  *				  el interfaz {@link Freezable}
  *						declare parents: @ConvertToFreezable * implements Freezable;
  *		- PASO 2: Crear el interfaz {@link Freezable} (ver aspecto {@link r01f.aspects.dirtytrack.DirtyStateTrackableInterfaceAspect})
- *		- PASO 3: Implementar los pointcuts específicos para el interfaz {@link Freezable}
+ *		- PASO 3: Implementar los pointcuts especficos para el interfaz {@link Freezable}
  *
  * IMPORTANTE!!	En este aspecto se implementa el PASO 1 y en el aspecto {@link FreezableInterfaceAspect}
  * 				se implementan el PASO 2 y PASO 3
@@ -25,7 +25,7 @@ import r01f.aspects.interfaces.freezable.Freezable;
 privileged public aspect ConvertToFreezableAnnotationAspect { 
 	/**
 	 * PASO 1: Hacer que todos los tipos anotados con @ConvertToFreezable implementen
-	 * 		   el interfaz Freezable (cuyo comportamiento está en {@link FreezableInterfaceAspect})
+	 * 		   el interfaz Freezable (cuyo comportamiento est en {@link FreezableInterfaceAspect})
 	 */
 	declare parents: @ConvertToFreezable * implements Freezable;
 
