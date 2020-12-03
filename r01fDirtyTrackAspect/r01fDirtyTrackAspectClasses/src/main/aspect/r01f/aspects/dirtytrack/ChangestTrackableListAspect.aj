@@ -19,7 +19,7 @@ privileged public aspect ChangestTrackableListAspect
 /////////////////////////////////////////////////////////////////////////////////////////
 	@SuppressAjWarnings
     void around(List list,int index,Object value) : 
-    			call(public * (@ConvertToDirtyStateTrackable List+).add(int,*))	// llamar al m�todo add de un tipo anotado con @ConvertToDirtyStateTrackable y que extiende de List
+    			call(public * (@ConvertToDirtyStateTrackable List+).add(int,*))	// llamar al mtodo add de un tipo anotado con @ConvertToDirtyStateTrackable y que extiende de List
     		 && args(index,value)												// argumentos del metodo add
     		 && target(list) {													// el tipo anotado con @ConvertToDirtyStateTrackable y que extiende de List
     	ChangesTrackableCollection trck = (ChangesTrackableCollection)list;
@@ -32,7 +32,7 @@ privileged public aspect ChangestTrackableListAspect
     }
     @SuppressAjWarnings
     Object around(List list,int index,Object value) : 
-    			call(public * (@ConvertToDirtyStateTrackable List+).set(int,*))	// llamar al m�todo set de un tipo anotado con @ConvertToDirtyStateTrackable y que extiende de List
+    			call(public * (@ConvertToDirtyStateTrackable List+).set(int,*))	// llamar al mtodo set de un tipo anotado con @ConvertToDirtyStateTrackable y que extiende de List
     		 && args(index,value)												// argumentos del metodo set
     		 && target(list) {													// el tipo anotado con @ConvertToDirtyStateTrackable y que extiende de List
     	Object outVal = null;
@@ -47,7 +47,7 @@ privileged public aspect ChangestTrackableListAspect
     }
     @SuppressAjWarnings
     boolean around(List list,int fromIndex,Collection otherCol) : 
-    			call(public * (@ConvertToDirtyStateTrackable List+).addAll(int,Collection))		// llamar al m�todo addAll de un tipo anotado con @ConvertToDirtyStateTrackable y que extiende de List
+    			call(public * (@ConvertToDirtyStateTrackable List+).addAll(int,Collection))		// llamar al mtodo addAll de un tipo anotado con @ConvertToDirtyStateTrackable y que extiende de List
     		 && args(fromIndex,otherCol)															// argumentos del metodo addAll
     		 && target(list) {																	// el tipo anotado con @ConvertToDirtyStateTrackable y que extiende de List
     	boolean outVal = true;
@@ -62,7 +62,7 @@ privileged public aspect ChangestTrackableListAspect
     }
     @SuppressAjWarnings
     Object around(List list,int index) : 
-    			call(public * (@ConvertToDirtyStateTrackable List+).remove(int))// llamar al m�todo remove de un tipo anotado con @ConvertToDirtyStateTrackable y que extiende de List
+    			call(public * (@ConvertToDirtyStateTrackable List+).remove(int))// llamar al mtodo remove de un tipo anotado con @ConvertToDirtyStateTrackable y que extiende de List
     		 && args(index)														// argumentos del metodo remove
     		 && target(list) {													// el tipo anotado con @ConvertToDirtyStateTrackable y que extiende de List
     	Object outVal = null;

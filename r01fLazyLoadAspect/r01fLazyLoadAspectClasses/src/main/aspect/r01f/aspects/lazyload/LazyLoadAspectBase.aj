@@ -43,7 +43,7 @@ privileged public abstract aspect LazyLoadAspectBase<T> {
     	// Get the joinpoint info
     	Object container = thisJoinPoint.getTarget();
 		FieldSignature fs = (FieldSignature)thisJoinPoint.getSignature();
-		Field f = fs.getField();						// Field que se est� accediendo
+		Field f = fs.getField();						// Field que se est accediendo
 		
 		// Get the member's object
     	Object lazyLoaded = proceed();

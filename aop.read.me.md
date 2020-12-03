@@ -17,7 +17,7 @@ El fichero META-INF/aop.xml debe estar presente en el classpath con el siguiente
 	 							- DirtyStateTrackableAspect inyecta el miembro  _trackingStatus de tipo DirtyTrackingStatus
 	 							- ChangesTrackableMapAspect inyecta el miembro _changesTracker de tipo CollectionChangesTracker<K>
 	 						el weaver debe conocer los tipos DirtyTrackingStatus y CollectionChangesTracker
-	 						Si se quitan los includes de estos tipos, NO se crea correctamente el m�todo para establecer los miembros
+	 						Si se quitan los includes de estos tipos, NO se crea correctamente el mtodo para establecer los miembros
 	 						_trackingStatus y _changesTracker
 	 						Ej: si se quita el include <include within="r01f.types.dirtytrack.interfaces..*" />
 	 							se lanza el error
